@@ -1,0 +1,24 @@
+php configuration : php.ini
+
+[mail function]
+For Win32 only.
+https://php.net/smtp
+SMTP=smtp.gmail.com
+https://php.net/smtp-port
+smtp_port=587
+
+sendmail_from = unicodenepalityping@gmail.com
+sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
+
+
+sendmail configuration: sendmail.ini
+
+[sendmail]
+smtp_server=smtp.gmail.com
+smtp_port=587
+smtp_ssl=auto
+error_logfile=error.log
+debug_logfile=debug.log
+auth_username=unicodenepalityping@gmail.com
+auth_password=axnv hvrx adrr jweg
+hostname=localhost

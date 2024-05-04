@@ -1,0 +1,196 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, sans-serif;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    background-color:#01aae4;
+    background-image:url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 850 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" overflow="auto" shape-rendering="auto" fill="%23ffffff"><path id="wavepath" d="M 0 1000 -80 800 Q 90 350 400 600 t 500 -100 400 0 v1000 z" /></svg>');
+}
+.background{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../_images/BG.png");
+    opacity: 0.1;
+    background-size: cover; 
+    background-position: center;
+    position: absolute;
+}
+header{
+    position: relative;
+    width:100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.navbar{
+    display: flex;
+    padding: 10px 80px 10px 80px;
+    align-items: center;
+    max-width: 1350px;
+}
+.logo {
+    width: 400px;
+}
+.navbar .logotext{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.navbar .logotext h2{
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.7rem;
+}
+.form-box{
+    width: 90%;
+    max-width: 450px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background:#ffffff;
+    padding: 50px 60px 50px;
+    text-align:center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 16px;
+}
+/*blur the backgroud section while popup action*/
+.form-box#blur.active{
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/*Eror and Success Message*/
+.form-box .input-group .error-txt{
+    background: rgb(238, 198, 198);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 15px;
+    font-size: 0.96rem;
+    color: red;
+    margin: 0px;
+}
+.form-box .input-group .success-txt{
+    background: rgb(174, 217, 176);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 15px;
+    font-size: 0.96rem;
+    color:green;
+    margin: 0px;
+}
+
+.form-box h1{
+    font-size: 30px;
+    margin-bottom: 40px;
+    color: #0091ca ;
+    position: relative;
+}
+.form-box h1:after{
+    content:'';
+    width:30px;
+    height:4px;
+    border-radius:3px;
+    background:#0091ca;
+    position:absolute;
+    bottom:-12px;
+    left:50%;
+    transform:translateX(-50%);
+}
+.input-field{
+    font-size: 0.96rem;
+    background:#eaeaea;
+    margin: 10px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+input{
+    width: 100%;
+    background: transparent;
+    border:0;
+    outline:0;
+    padding: 15px 15px;
+}
+
+.input-field i{
+    margin-left: 15px;
+    color: #999;
+}
+.form-box a{
+    font-size: 0.96rem;
+    text-decoration: none;
+    color: #0091ca;
+}
+.form-box a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.remember-forgot{
+    display: flex;
+    font-size: 0.96rem;
+}
+input[type="checkbox"]{
+    height: 14px;
+    width: 14px;
+    background-color: #d5d5d5;
+    border-radius: 5px;
+    cursor: pointer;
+    margin:2px 2px 0 2px;
+}
+.remember-forgot p{
+    display: flex;
+    margin-left: 110px;
+}
+.remember-forgot p{
+    font-size: 0.96rem;
+    text-decoration: none;
+    color: #0091ca;
+}
+.remember-forgot p:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.btn-field{
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+}
+.btn-field button{
+    flex-basis:40%;
+    font-size: 16px;
+    background:#0091ca;
+    color:white;
+    font-weight: bold;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.btn-field button:hover{
+    background-color:#0091ca;
+    transform: scale(1.01);
+}
+
+.signup-link p{
+    text-align: center;
+    font-size: 0.96rem;
+}
+#togglePassword{
+    margin-right: 10px;
+    cursor: pointer;
+}

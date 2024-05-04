@@ -1,0 +1,241 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-color:#01aae4;
+    background-image:url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 850 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" overflow="auto" shape-rendering="auto" fill="%23ffffff"><path id="wavepath" d="M 0 1000 -80 800 Q 90 350 400 600 t 500 -100 400 0 v1000 z" /></svg>');
+}
+.background{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../_images/BG.png");
+    opacity: 0.1;
+    background-size: cover; 
+    background-position: center;
+    position: absolute;
+}
+.container{
+    width: 100%;
+    position: relative;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+h4{
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+}
+.box{
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    right: 20%;
+    min-width: 350px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.menu-options{
+    display: flex;
+}
+.column1{
+    width: 35%;
+    padding: 20px;
+}
+.column2{
+    width: 100%;
+    padding: 20px;
+}
+
+.list-group{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.column1 a{
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    margin: 10px 0 10px 0;
+    padding-left: 10px;
+    transition: all .1s ease-in-out;
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+.column1 a:hover{
+    background-color: #F2BE45;
+    border: 2px solid black;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    height: 25px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.list-group .active{
+    font-weight: 600;
+    border: 2px solid #F2BE45;
+    background-color: #F2BE45;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    height: 25px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.contents{
+    color:black;
+    padding: 10px;
+    overflow: hidden;
+}
+.profile-pic{
+    position: relative;
+    display: flex;
+    margin-left: 10px;
+}
+img{
+    border: 1px solid #787272;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    position: relative;
+}
+.upload-btn{
+    color:white;
+    position: absolute;
+    text-align: center;
+    width:149px;
+    height: 25px;
+    left: 1.7%;
+    top:79%;
+    font-size: 1rem;
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+}
+.upload-btn:hover{
+    background-color: lightblue;
+}
+.uploadimg{
+    padding: 5px;
+    margin-left: 10px;
+    position: absolute;
+    top: 34%;
+    left: 48%;
+    color: white;
+    background: rgb(19, 157, 212);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.uploadimg:hover{
+    transform: scale(1.01);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+hr{
+    margin:10px 0 10px 10px;
+}
+.showpassword{
+    font-size: 16px; 
+    padding: 0 0 0 10px;
+}
+.showpassword input{
+    margin: 12px 5px 10px 10px;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;  
+    font-size: 16px; 
+    padding: 10px;
+}
+.form-group input{
+    height: 30px;
+    font-size: 16px;
+    color: #322f2f;
+    padding-left: 10px;
+    margin: 10px 0 10px 10px;
+}
+.form-group label{
+    margin-left:10px ;
+}
+input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.form-group .warning{
+    background-color: rgb(241, 202, 202);
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.form-group .comment{
+    background-color:#ffffa7;
+    padding: 5px;
+    margin: 15px 0 10px 10px;
+    text-align: center;
+}
+.warning a{
+    text-decoration: none;
+    color:rgb(7, 135, 255);
+}
+.warning a:hover{
+    text-decoration: underline;
+}
+.btns{
+    text-align: right;
+    margin: 10px;  
+}
+.btns button{
+    padding: 5px 10px 5px 10px;
+    color: white;
+    background: rgb(19, 157, 212);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btns :hover{
+    transform: scale(1.01);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.btns .cancle-btn{
+    background: none;
+    color: black;
+}
+h5{
+    font-size: 16px;
+    margin: 20px 0 10px 10px;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+p{
+    margin: 10px 0 20px 10px;
+    align-items: center;
+    font-size:16px;
+    color: black
+}
+.showconfirmpassword{
+    position: relative;
+    margin-right: 15px;
+}
+.form-control {
+    position: relative;
+    width: 100%;
+}
+.fa-eye-slash {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%); 
+    cursor: pointer; 
+}

@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-color:#01aae4;
+    background-image:url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 850 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" overflow="auto" shape-rendering="auto" fill="%23ffffff"><path id="wavepath" d="M 0 1000 -80 800 Q 90 350 400 600 t 500 -100 400 0 v1000 z" /></svg>');
+}
+.background{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../_images/BG.png");
+    opacity: 0.1;
+    background-size: cover; 
+    background-position: center;
+    position: absolute;
+}
+header{
+    position: relative;
+    width:100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.navbar{
+    display: flex;
+    padding: 10px 80px 10px 80px;
+    align-items: center;
+    max-width: 1350px;
+}
+.logo {
+    width: 400px;
+}
+.navbar .logotext{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.navbar .logotext h2{
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.7rem;
+}
+/*Reset password section style */
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    width: 450px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: rgba(0,0,0,0.08) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.title-section{
+    margin-bottom: 20px;
+}
+.title{
+    color: #38475a;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-decoration: capitalize;
+}
+.para{
+    color: #38475a;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    text-decoration: capitalize;
+}
+.inputfield{
+    position: relative;
+}
+.inputfield .label-title{
+    color: #38475a;
+    text-decoration: capitalize;
+    margin-bottom: 10px;
+    font-size: 14px;
+    display:block;
+}
+.inputfield input{
+    width: 100%;
+    background-color: none;
+    color: #38475a;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 300;
+    border: 2px solid black;
+    padding: 9px 18px 9px 52px;
+    outline: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.inputfield input:placeholder{
+    color: #38475a;
+    font-size: 16px;
+    font-weight: 400;
+}
+.inputfield .icon{
+    position: absolute;
+    color: #38475a;
+    left: 13px;
+    top:calc(50% - 11px);
+    text-align: center;
+    font-size: 23px;
+}
+.error-txt{
+    overflow: hidden;
+    background: rgb(238, 198, 198);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 15px;
+    font-size: 0.96rem;
+    color: red;
+    margin: 10px 0 15px 0;
+}
+.btn{
+    display: flex;
+    gap: 20px;
+}
+.cancel-btn{
+    height: 40px;
+    min-width: 60px;
+    background-color: #38475a7a;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    text-decoration: capitalize;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.cancel-btn a{
+    text-decoration: none;
+    font-size: 16px;
+    color:black;
+}
+.cancel-btn:hover{
+    opacity: 0.95;
+}
+.submit-btn{
+    width: 100%;
+    height:40px;
+    background-color: rgb(39, 155, 201);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    text-decoration: capitalize;
+    cursor: pointer;
+}
+.submit-btn:hover{
+    opacity: 0.95;  
+}
