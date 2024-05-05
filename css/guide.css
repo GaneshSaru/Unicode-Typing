@@ -1,10 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-
 } 
-
 header{
 background-color: #01aae4;
 position: relative;
@@ -148,36 +145,23 @@ width: 100%;
 .sub-menu-link:hover p{
 font-weight: 600;
 } 
-section{
-    position: relative;
-    align-items: center;
-}
 /*first section*/
 .first{
+    position: relative;
+    display: flex; 
+    flex-direction: column;
     height: 100vh;
     background-color: #01aae4;
     background-image:url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 850 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" overflow="auto" shape-rendering="auto" fill="%23ffffff"><path id="wavepath" d="M 0 1000 -80 800 Q 90 350 400 600 t 500 -100 400 0 v1000 z" /></svg>');
 }
 .info{
-    position: absolute;
-    top: 5%;
-    left: 10%;
-    max-width: 600px;
-    text-align: left;
-    font-size: 1.8rem;
-    font-weight: 500;
-    color: white;
-}
-.info h4{
-    text-decoration: underline;
-    text-underline-offset: 10px;  
-    font-size: 1.6rem;
-    line-height: 1.5em;
-    font-weight: 600px;
-    text-align: left;
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
 }
 .info p{
-    margin-top: 10px;
+    margin-top: 30px;
+    color: white;
     line-height: 1.5em;
     font-weight: 600px;
     text-align: justify;
@@ -185,23 +169,15 @@ section{
     text-indent: 40px;
 }
 .first img{
-    position: relative;
-    top: 15%;
-    left: 60%;
     max-width: 500px;
     max-height: 300px;
     border-radius: 25px;
 }
-.second{
-    background-color: #ffffff;
-    justify-content: center;
-    height: 400vh;
-    padding: 20px 200px 20px 200px;
-}
 .file{
     display: flex;
-    justify-content: center; 
-    gap: 20px;
+    flex-direction: column; 
+    gap: 5px;
+    align-items: center;
 }
 .file p{
     font-size: 20px;
@@ -213,6 +189,7 @@ section{
 .file a{
     text-decoration: none;
     font-size: 16px;
+    max-width: 80px;
     height: 30px;
     padding: 5px;
     border-radius: 5px;
@@ -222,15 +199,6 @@ section{
 a:hover{
     transition: 0.1s ease;
     transform:scale(1.05);
-}
-.third{
-    background-color: #ffffff;
-    justify-content: center;
-    height: 200vh;
-}
-.fourth{
-    padding: 20px 200px 20px 200px;
-    height: 180vh;
 }
 .container img{
     margin: 20px 0px 20px 0;
@@ -266,13 +234,8 @@ a:hover{
     font-weight: 600px;
     margin-left: 20px;
 }
-.notes{
+.third{
     background-color: #F2BE45;
-    justify-content: center;
-    text-align: justify;
-    align-items: center;
-    padding: 20px 200px 20px 200px;
-    height: 500px;
 }
 .notes h4{
     margin: 20px 0 20px 0;
@@ -282,31 +245,89 @@ a:hover{
     text-align: left;
 }
 .notes li{
-    margin-left: 50px;
     font-size: 1.2rem;
     line-height: 1.5em;
     font-weight:450;
 }
 .notes p{
-    margin-left:50px;
     font-size: 20px;
     font-weight: 450;
-    text-align: left;
-    text-indent: 30px;
+    text-align: justify;
+}
+.forth{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    align-items: center;
+}
+.forth img{
+    width:100%;
+}
+.forth a{
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    max-width: 200px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    background:#01aae4;
+    color: #ffffff;
+    margin-bottom: 10px;
 }
 footer{
+    display: flex;
+    flex-direction: column;
     height: 200px;
     width: 100%;
     padding-top: 30px;
     background-color: #01aae4;
     color: black;
+    line-height: 1.5em;
     text-align: center;
-    justify-content: center;
-    line-height: 1.5em;   
  }
- footer h3{
+ .p_title{
+    font-size: 20px;
     font-weight: 600;
  }
  footer p{
     font-weight: 600;
  }
+@media only screen and (min-width: 768px) {
+    .first {
+        flex-direction: row; 
+        justify-content: space-around; 
+        }
+    .info {
+        width: 50%;
+        text-align: left; 
+    }
+    .first img {
+        width: 50%; 
+        margin-top: 100px;
+    }
+    .second{
+        background-color: #ffffff;
+        justify-content: center;
+        padding: 20px 200px 20px 200px;
+    }
+    .third{
+        background-color: #F2BE45;
+        justify-content: center;
+    }
+    .notes{
+        min-height: 500px;
+        padding: 20px 200px 20px 200px;
+        text-align: justify;
+    }
+    .notes li,p{
+        margin-left: 50px;
+        line-height: 1.5em;
+    }
+    .forth{
+        display: flex;
+        flex-direction: column;
+        padding: 20px 200px 20px 200px;
+        align-items: center;
+    }
+}
