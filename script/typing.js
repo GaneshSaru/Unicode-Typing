@@ -517,10 +517,6 @@ let typedCharacters = "";
 let currentIndex = 0;
 let totalLetters = 0;
 let mistakeLetters = 0;
-let timer = null;
-let startTime = 0;
-let elapsedTime = 0;
-let isRunning = false;
 
 // Function to fetch contentMap according to selection
 function fetchcontentMap(contentMap, difficulty, keyRow, lesson) {
@@ -646,7 +642,11 @@ function calculateAcc() {
     const accuracyPercentage = Math.round(((totalLetters - mistakeLetters) / totalLetters) * 100);
     document.getElementById("accuracy").textContent = accuracyPercentage;
 }
-
+let timer = null;
+let startTime = 0;
+let elapsedTime = 0;
+let isRunning = false;
+displayTimeTaken = document.getElementById("timeTaken");
 // Function to start timer
 function startTimer() {
     if (!isRunning) {
