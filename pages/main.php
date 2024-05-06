@@ -86,7 +86,6 @@
         </script>
         </nav>
     </header>
-
     <!--APP-->
     <div class="app">
         <div class="wrapper">
@@ -154,7 +153,7 @@
         </div>
     </div>
 
-    <div class="container">
+<div class="container">
 
         <div class="content">
             <div class="wordDisplay" id="wordDisplay"></div>
@@ -880,8 +879,10 @@
         <!--layout n housing end-->
     </div>
 </div>   
-
-    </div>
+</div>
+<footer>
+    <strong>Refresh if any error occurs:</strong> If you encounter any errors, please try refreshing the page.
+</footer>
 
 <script src="../script/typing.js"></script>
 <script src="../script/keyhover.js"></script>
