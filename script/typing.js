@@ -409,7 +409,6 @@ levelSelect.addEventListener('change',updateContent);
                             "g]kfndf ;`\\rfngdf /x]sf AgLsf k/loJhgfx? A/Ju\\o Kfpg\\*];g, A[o tf/f kf&zfnf x'g\\ ."]
                     }   
     };
-    //keymapping according to Traditional Unicode Keyboard
     const keyMapping = {
             //home row
             ' ':' ',
@@ -508,198 +507,187 @@ levelSelect.addEventListener('change',updateContent);
             ')':'ण',
             '-':'औ',
             '_':'ओ',
-            '=':'‍‍‍‍‍',
-            '+':'‌‍',
+            '=':'‍‍‍',
+            '+':'‌',
     };
-
-//variables
-let typedCharacters = "";
-let currentIndex = 0;
-let totalLetters = 0;
-let mistakeLetters = 0;
-
-// Function to fetch contentMap according to selection
-function fetchcontentMap(contentMap, difficulty, keyRow, lesson) {
-    resetProgressBar();
-    if (keyRow in contentMap[difficulty]) {
-        return contentMap[difficulty]?.[keyRow]?.[lesson];
-    } else if (lesson in contentMap[difficulty]) {
-        return contentMap[difficulty]?.[lesson];
-    }
-}
-
-// Function to enable/disable keyRow selection
-function updateKeyRowSelection(selectedDifficulty) {
-    if (selectedDifficulty === "Advanced" || selectedDifficulty === "Expert") {
-        keyRowSelect.disabled = true;
-    } else {
-        keyRowSelect.disabled = false;
-    }
-}
-
-// Function to display next word
-function displayNextWord() {
-    if (currentIndex < currentlesson.length) {
-        currentWord = currentlesson[currentIndex];
-        var mappedWord = mapWord(currentWord);
-        typedCharacters = "";
-        typedWord.textContent = ""; // Clear the typed word
-        wordDisplay.textContent = mappedWord;
-        calculateLetters(); // Calculate total letters
-    } else {
-        wordDisplay.textContent = "";
-        document.removeEventListener("keydown", typing);
-        progressBar.innerText = "Practice Complete!";
-    }
-}
-
-// Function to map word characters
-function mapWord(word) {
-    return word.split('').map(char => keyMapping[char] || char).join('');
-}
-
-// keydown event listner
-document.addEventListener("keydown", typing);
-
-// Main typing function
-function typing(event) {
-    if (currentWord === typedCharacters) {
-        typedCharacters = "";
-        typedWord.textContent = ""; // Clear the typed word
-        displayNextWord();
-        erroraudio.pause(); 
-    } else if (currentWord && event.key === currentWord[typedCharacters.length]) {
-        typedCharacters += event.key;  // Correct key pressed, add to typed characters
-        correctaudio.play();
-        erroraudio.pause();
-        var mappedTypedCharacters = mapWord(typedCharacters);
-        typedWord.textContent = mappedTypedCharacters;
-        startTimer(); // Calculate time taken
-
-        if (typedCharacters.length === currentWord.length) {
-            stopTimer(); // Calculate time taken
-            typedCharacters = "";
-            typedWord.textContent = ""; // Clear the typed word
-            currentIndex++; //increment current index & display
-            displayNextWord();
-            calculateAcc(); // Calculate accuracy
-            calculateSpeed();
-            updateProgressBar();
-            sendDataToDatabase(); // Store data into database
+        //Exception handler--fetching contentMap according to selection
+        function fetchcontentMap(contentMap, difficulty, keyRow, lesson) {
+                resetProgressBar();
+                if (keyRow in contentMap[difficulty]) {
+                    return (contentMap[difficulty]?.[keyRow]?.[lesson]);
+                } else if (lesson in contentMap[difficulty]) {
+                    return contentMap[difficulty]?.[lesson];
+                }
         }
-    } else {
-        // Condition for mistakes
-        const commonkeys = ['Enter', 'Backspace', 'Control', 'Alt', 'Shift', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'CapsLock', 'Meta'];
-        if (!commonkeys.includes(event.key)) {
-            if (event.key !== currentWord[typedCharacters.length] && typedCharacters !== "" && 'Shift' + event.key) {
-                calculateMistake();
+            //to enable and disable the selection option of KeyRow
+            if(selectedDifficulty === "Advanced" ||  selectedDifficulty === "Expert")
+                {
+                    keyRowSelect.disabled = true;
+                }
+            else{
+                    keyRowSelect.disabled = false;
+                };
+        // Initialize index to 0
+        let currentIndex = 0;
+        let totalLetters = 0;
+        let mistakeLetters = 0;
+        //selection array
+        const currentlesson = fetchcontentMap(contentMap, selectedDifficulty, selectedKeyRow, selectedLesson);
+        function mapWord(word) {
+            return word.split('').map(char => keyMapping[char] || char).join('');
+        }
+        //console.log("Current lesson content:", currentlesson);
+        let typedCharacters = "";
+        let currentWord = currentlesson[currentIndex];
+            function displayNextWord() {
+                if (currentIndex < currentlesson.length) {
+                    currentWord = currentlesson[currentIndex];
+                    var mappedWord = mapWord(currentWord);
+                   // console.log(`index:${currentWord}`
+                    typedCharacters = "";
+                    typedWord.textContent =""; // Clear the typed word
+                    wordDisplay.textContent = mappedWord; 
+                   // console.log(`Display:${mappedWord}`)
+                    calculateLetters(); //to calculate total letters 
+                } 
+                else {
+                    wordDisplay.textContent = "";
+                    document.removeEventListener("keydown", typing);
+                    progressBar.innerText = "Practice Complete!";
+                   // console.log("Practice Completed!");
+                } 
             }
-        }
-    }
-}
-
-// Function to send data to database
-function sendDataToDatabase() {
-    const accuracyPercentage = Math.round(((totalLetters - mistakeLetters) / totalLetters) * 100);
-    const typingSpeedWPM = Math.round(((totalLetters - mistakeLetters) / 5) / (elapsedTime / 60000));
-    const data = {
-        accuracyPercentage: accuracyPercentage,
-        typingSpeedWPM: typingSpeedWPM
-    };
-    // Send the data to your backend
-    fetch('storeData.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to store data in the database');
-        }
-    })
-    .catch(error => {
-        console.error('Error storing data:', error);
-    });
-}
-
-// Function to calculate total letters
-function calculateLetters() {
-    totalLetters = currentWord.length;
-    document.getElementById("totalLetters").textContent = totalLetters;
-}
-
-// Function to calculate mistakes
-function calculateMistake() {
-    mistakeLetters++;
-    erroraudio.play(); // Play error audio  
-    document.getElementById("mistakeLetters").textContent = mistakeLetters;
-}
-
-// Function to calculate accuracy
-function calculateAcc() {
-    const accuracyPercentage = Math.round(((totalLetters - mistakeLetters) / totalLetters) * 100);
-    document.getElementById("accuracy").textContent = accuracyPercentage;
-}
-let timer = null;
-let startTime = 0;
-let elapsedTime = 0;
-let isRunning = false;
-displayTimeTaken = document.getElementById("timeTaken");
-// Function to start timer
-function startTimer() {
-    if (!isRunning) {
-        resetCalculation();
-        startTime = Date.now() - elapsedTime;
-        timer = setInterval(() => {
-            const currentTime = Date.now();
-            elapsedTime = currentTime - startTime;
-            let seconds = Math.floor(elapsedTime / 1000 % 60);
-            seconds = String(seconds).padStart(2, '0');
-            displayTimeTaken.textContent = `${seconds}`;
-        }, 10);
-        isRunning = true;
-    }
-}
-
-// Function to stop timer
-function stopTimer() {
-    if (isRunning) {
-        clearInterval(timer);
-        isRunning = false;
-    }
-}
-
-// Function to calculate speed
-function calculateSpeed() {
-    const typingSpeedWPM = Math.round(((totalLetters - mistakeLetters) / 5) / (elapsedTime / 60000));
-    document.getElementById("speed").textContent = `${Math.abs(typingSpeedWPM)}`;
-}
-
-// Function to update progress bar
-function updateProgressBar() {
-    const progressPercentage = (currentIndex / currentlesson.length) * 100;
-    progressBar.style.width = progressPercentage + '%';
-}
-
-// Function to reset progress bar
-function resetProgressBar() {
-    progressBar.style.width = 0;
-    progressBar.innerText = "";
-}
-
-// Function to reset calculation
-function resetCalculation() {
-    elapsedTime = 0;
-    mistakeLetters = 0;
-    document.getElementById("mistakeLetters").innerText = "00";
-    document.getElementById("accuracy").innerText = "00";
-    document.getElementById("speed").innerText = "00";
-}
-
-// Initial display
-updateKeyRowSelection(selectedDifficulty);
-const currentlesson = fetchcontentMap(contentMap, selectedDifficulty, selectedKeyRow, selectedLesson);
-displayNextWord();
+  
+            // keyevent
+            const typedWord = document.getElementById("typedWord");
+            document.addEventListener("keydown", typing);
+            function typing(event){
+                if (currentWord === typedCharacters) {
+                    typedCharacters = "";
+                    typedWord.textContent = ""; // Clear the typed word
+                    displayNextWord(); 
+                    erroraudio.pause();
+                } else if (currentWord && event.key === currentWord[typedCharacters.length]) {
+                    // Correct key pressed, add to typed characters
+                    typedCharacters += event.key;
+                    correctaudio.play();//play correct audio
+                     erroraudio.pause();
+                        var mappedTypedCharacters = mapWord(typedCharacters);
+                         typedWord.textContent = mappedTypedCharacters;
+                         console.log(`typedword:${mappedTypedCharacters}`)
+                         startTimer();    //to calculate time taken;
+                    
+                    if (typedCharacters.length === currentWord.length) {
+                        stopTimer();//to calculate time taken; 
+                        typedCharacters = "";
+                        typedWord.textContent = ""; // Clear the typed word
+                        currentIndex++;
+                        displayNextWord();
+                        calculateAcc();// to calculate accuracy;   
+                        calculateSpeed(); 
+                        updateProgressBar();//update progress bar
+                        sendDataToDatabase();//to store data into database;
+                    }
+                }
+               else
+                { 
+                    //condition for mistakes 
+                     const commonkeys = ['Enter', 'Backspace', 'Control', 'Alt', 'Shift', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'CapsLock','Meta'];
+                     if (!commonkeys.includes(event.key)){
+                        if (event.key !== currentWord[typedCharacters.length]&& typedCharacters!="" && 'Shift'+event.key) {
+                         calculateMistake();
+                     }
+                    }
+                }  
+            }
+               //sendDatatoDATABASE
+            function sendDataToDatabase() {
+                const accuracyPercentage = Math.round(((totalLetters - mistakeLetters)/totalLetters) * 100);
+                const typingSpeedWPM = Math.round(((totalLetters - mistakeLetters)/5)/(elapsedTime / 60000));
+                const data = {
+                    accuracyPercentage: accuracyPercentage,
+                    typingSpeedWPM: typingSpeedWPM
+                };
+                // Send the data to your backend
+                fetch('storeData.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to store data in the database');
+                    }
+                        //console.log('Data stored successfully');
+                })
+                .catch(error => {
+                   // console.error('Error storing data:', error);
+                });
+            }
+            //calculation functions
+            function calculateLetters(){
+                totalLetters = currentWord.length;
+                document.getElementById("totalLetters").textContent = totalLetters;
+               // console.log(`Total letters: ${totalLetters}`);
+             }    
+            function calculateMistake(){
+                    mistakeLetters++;
+                    console.log(`Mistake letters: ${mistakeLetters}`);//to display the mistakelatters     
+                    erroraudio.play();// play error audio  
+                document.getElementById("mistakeLetters").textContent = mistakeLetters;
+            }
+            function calculateAcc()
+             {
+                const accuracyPercentage = Math.round(((totalLetters - mistakeLetters)/totalLetters) * 100);
+                document.getElementById("accuracy").textContent = accuracyPercentage;
+               // console.log(`Accuracy: ${accuracyPercentage}%`);  
+             }
+             let timer = null;
+             let startTime = 0;
+             let elapsedTime = 0;
+             let isRunning = false;
+             displayTimeTaken = document.getElementById("timeTaken");
+             function startTimer() {
+                 if (!isRunning) {
+                    resetCalculation(); //Reseting for new start
+                    startTime = Date.now() - elapsedTime;
+                    timer = setInterval(() => {
+                        const currentTime = Date.now();
+                        elapsedTime = currentTime - startTime; //in milliseconds(i.e a minute (60 seconds × 1000 milliseconds))
+                        let seconds = Math.floor(elapsedTime / 1000 % 60);
+                        seconds = String(seconds).padStart(2, '0');
+                        displayTimeTaken.textContent = `${seconds}`;
+                    }, 10);
+                   isRunning = true;
+               }
+             }  
+             function stopTimer() {
+                 if (isRunning) {
+                     clearInterval(timer);
+                     isRunning = false;
+                 }
+             }   
+             function calculateSpeed(){
+                const typingSpeedWPM = Math.round(((totalLetters - mistakeLetters)/5)/(elapsedTime / 60000));
+                document.getElementById("speed").textContent = `${Math.abs(typingSpeedWPM)}`; 
+             } 
+             function updateProgressBar() {
+                const progressPercentage = (currentIndex / currentlesson.length) * 100;
+                progressBar.style.width = progressPercentage + '%';
+             }
+             function resetProgressBar(){
+                progressBar.style.width = 0;
+                progressBar.innerText= "";
+             } 
+             function resetCalculation(){
+                elapsedTime = 0; //Reseting to zero on every start
+                mistakeLetters = 0; //Resetting mistakeletters to zero for new calcu
+                document.getElementById("mistakeLetters").innerText = "00";
+                document.getElementById("accuracy").innerText = "00"; 
+                document.getElementById("speed").innerText ="00";
+             }
+    // Initial display
+    displayNextWord();
 }
